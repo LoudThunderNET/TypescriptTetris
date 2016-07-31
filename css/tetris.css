@@ -1,0 +1,8 @@
+﻿.sqr {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  border: #454545 1px solid;
+  line-height:30px;
+  text-align:center;
+}

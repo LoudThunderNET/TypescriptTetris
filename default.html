@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <style type="text/css">
+        .sqr {
+            width:30px;
+            height:30px;
+            border:#808080 1px solid;
+            box-sizing:border-box;
+            position:absolute;
+            line-height: 30px;
+            text-align: -webkit-center;
+            text-align: center;
+        }
+        #MainContainer {
+            position:relative;
+            width:300px;
+            height:600px;
+            border-bottom: #000000 1px solid;
+            border-left  : #000000 1px solid;
+            border-right : #000000 1px solid;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #scopeContainer {
+            position: absolute;
+            left: 310px;
+            font-size: 18pt;
+            font-weight: bold;
+            color:red;
+        }
+        .score {
+            width:80px;
+            height:30px;
+            text-align: right;
+            text-align: -webkit-right;
+            line-height:30px;
+            font-family: sans-serif;
+        }
+    </style>
+    <script language="javascript" src="scripts/tetris.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <div id="MainContainer">
+        <div id="scopeContainer"><div class="score"></div></div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            var game = new Tetris.Game.TetrisGame();
+            game.StartGame();
+        });
+        
+    </script>
+</body>
+</html>
