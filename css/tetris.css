@@ -17,7 +17,7 @@
 	border-right : #000000 1px solid;
 	margin-left: auto;
 	margin-right: auto;
-	background-image: url('images/background5.jpg');
+	background-image: url(../images/background5.jpg);
 }
 #scopeContainer {
 	position: absolute;
