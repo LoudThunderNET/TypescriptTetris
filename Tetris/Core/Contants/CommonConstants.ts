@@ -1,6 +1,6 @@
 ﻿namespace Tetris.Core.Constants
 {
-    export const MaxMainFieldWidth: number = 10;
+    export const MaxMainFieldWidth: number = 30;
     export const MaxMainFieldHeight: number = 20;
     export const BonusForRemovedLine: number = 100;
     export const BonusForNewShape: number = 15;

@@ -10,20 +10,17 @@
         Red = 0xFF0000,
         Firebrick = 0xB22222,
         DarkRed = 0x8B0000,
-        // PINK HTML COLOR NAMES
         Pink = 0xFFC0CB,
         LightPink = 0xFFB6C1,
         HotPink = 0xFF69B4,
         DeepPink = 0xFF1493,
         MediumVioletRed = 0xC71585,
         PaleVioletRed = 0xDB7093,
-        // ORANGE HTML COLOR NAMES
         Coral = 0xFF7F50,
         Tomato = 0xFF6347,
         OrangeRed = 0xFF4500,
         DarkOrange = 0xFF8C00,
         Orange = 0xFFA500,
-        // YELLOW HTML COLOR NAMES
         Gold = 0xFFD700,
         Yellow = 0xFFFF00,
         LightYellow = 0xFFFFE0,
@@ -35,7 +32,6 @@
         PaleGoldenrod = 0xEEE8AA,
         Khaki = 0xF0E68C,
         DarkKhaki = 0xBDB76B,
-        // PURPLE HTML COLOR NAMES
         Lavender = 0xE6E6FA,
         Thistle = 0xD8BFD8,
         Plum = 0xDDA0DD,
@@ -54,7 +50,6 @@
         Indigo = 0x4B0082,
         SlateBlue = 0x6A5ACD,
         DarkSlateBlue = 0x483D8B,
-        // GREEN HTML COLOR NAMES
         GreenYellow = 0xADFF2F,
         Chartreuse = 0x7FFF00,
         LawnGreen = 0x7CFC00,
@@ -78,7 +73,6 @@
         LightSeaGreen = 0x20B2AA,
         DarkCyan = 0x008B8B,
         Teal = 0x008080,
-        // BLUE HTML COLOR NAMES
         Aqua = 0x00FFFF,
         Cyan = 0x00FFFF,
         LightCyan = 0xE0FFFF,
@@ -104,7 +98,6 @@
         DarkBlue = 0x00008B,
         Navy = 0x000080,
         MidnightBlue = 0x191970,
-        // BROWN HTML COLOR NAMES
         Cornsilk = 0xFFF8DC,
         Blanchedalmond = 0xFFEBCD,
         Bisque = 0xFFE4C4,
@@ -122,7 +115,6 @@
         Sienna = 0xA0522D,
         Brown = 0xA52A2A,
         Maroon = 0x800000,
-        // WHITE HTML COLOR NAMES
         White = 0xFFFFFF,
         Snow = 0xFFFAFA,
         Honeydew = 0xF0FFF0,
@@ -140,7 +132,6 @@
         Linen = 0xFAF0E6,
         LavenderBlush = 0xFFF0F5,
         Mistyrose = 0xFFE4E1,
-        // GRAY HTML COLOR NAMES
         Gainsboro = 0xDCDCDC,
         LightGray = 0xD3D3D3,
         Silver = 0xC0C0C0,

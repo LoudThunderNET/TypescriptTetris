@@ -19,8 +19,8 @@
                         (sq3.Top >= 2) && this.IsCellFree(sq3.Left, sq3.Top-2, sq3.UniqueID);
                 case 1:
                         return this.IsCellFree(sq0.Left - 1, sq0.Top + 1, sq0.UniqueID)&&
-                        (sq2.Top > 0) && this.IsCellFree(sq2.Left + 1, sq2.Top - 1, sq2.UniqueID)&&
-                        (sq3.Top >= 2) && this.IsCellFree(sq3.Left, sq3.Top - 2, sq3.UniqueID);
+                            (sq2.Top > 0) && this.IsCellFree(sq2.Left + 1, sq2.Top - 1, sq2.UniqueID) &&
+                            (sq3.Left <= Core.Constants.MaxMainFieldWidth-2) && this.IsCellFree(sq3.Left + 2, sq3.Top, sq3.UniqueID);
                 case 2:
                     return this.IsCellFree(sq0.Left - 1, sq0.Top - 1, sq0.UniqueID)
                         && (sq2.Left < Core.Constants.MaxMainFieldWidth) && this.IsCellFree(sq2.Left + 1, sq2.Top + 1, sq2.UniqueID)

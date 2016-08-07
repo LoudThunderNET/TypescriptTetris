@@ -5,15 +5,18 @@ namespace Tetris.Game.Fabric
     {
         GetSquares(parentHtml: any, initLeft: number, initTop: number, mainField, amount:number): Square[]
         {
-            let backgroundColorIndex = Math.round((Math.random() * 141));
+            let backgroundColorIndex = Math.round((Math.random() * 135));
             let enumIndex: number = 0;
             let color: number;
+            console.log(backgroundColorIndex)
             for (let i in BackGroundColor)
             {
                 if (enumIndex === backgroundColorIndex)
                 {
                     color = parseInt(i);
-                    break;
+                    if (!isNaN(color)) {
+                        break;
+                    }
                 }
                 enumIndex++;
             }

@@ -12,9 +12,10 @@
         }
 
         InstatiateHtml(): void {
+            let heximalColor = this.BackgroundColor.toString(16);
             this.HtmlElement = $('<div>')
                 .addClass('sqr')
-                .css('background-color', '#' + this.BackgroundColor.toString(16))
+                .css('background-color', '#' + '000000'.substr(0, 6 - heximalColor.length) + heximalColor)
                 .css('display', 'none')
                 .appendTo($(this.parentHtml));
         }

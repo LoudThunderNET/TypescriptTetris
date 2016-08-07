@@ -9,7 +9,7 @@ var Tetris;
     (function (Core) {
         var Constants;
         (function (Constants) {
-            Constants.MaxMainFieldWidth = 10;
+            Constants.MaxMainFieldWidth = 30;
             Constants.MaxMainFieldHeight = 20;
             Constants.BonusForRemovedLine = 100;
             Constants.BonusForNewShape = 15;
@@ -34,20 +34,17 @@ var Tetris;
                 BackgroundColor[BackgroundColor["Red"] = 16711680] = "Red";
                 BackgroundColor[BackgroundColor["Firebrick"] = 11674146] = "Firebrick";
                 BackgroundColor[BackgroundColor["DarkRed"] = 9109504] = "DarkRed";
-                // PINK HTML COLOR NAMES
                 BackgroundColor[BackgroundColor["Pink"] = 16761035] = "Pink";
                 BackgroundColor[BackgroundColor["LightPink"] = 16758465] = "LightPink";
                 BackgroundColor[BackgroundColor["HotPink"] = 16738740] = "HotPink";
                 BackgroundColor[BackgroundColor["DeepPink"] = 16716947] = "DeepPink";
                 BackgroundColor[BackgroundColor["MediumVioletRed"] = 13047173] = "MediumVioletRed";
                 BackgroundColor[BackgroundColor["PaleVioletRed"] = 14381203] = "PaleVioletRed";
-                // ORANGE HTML COLOR NAMES
                 BackgroundColor[BackgroundColor["Coral"] = 16744272] = "Coral";
                 BackgroundColor[BackgroundColor["Tomato"] = 16737095] = "Tomato";
                 BackgroundColor[BackgroundColor["OrangeRed"] = 16729344] = "OrangeRed";
                 BackgroundColor[BackgroundColor["DarkOrange"] = 16747520] = "DarkOrange";
                 BackgroundColor[BackgroundColor["Orange"] = 16753920] = "Orange";
-                // YELLOW HTML COLOR NAMES
                 BackgroundColor[BackgroundColor["Gold"] = 16766720] = "Gold";
                 BackgroundColor[BackgroundColor["Yellow"] = 16776960] = "Yellow";
                 BackgroundColor[BackgroundColor["LightYellow"] = 16777184] = "LightYellow";
@@ -59,7 +56,6 @@ var Tetris;
                 BackgroundColor[BackgroundColor["PaleGoldenrod"] = 15657130] = "PaleGoldenrod";
                 BackgroundColor[BackgroundColor["Khaki"] = 15787660] = "Khaki";
                 BackgroundColor[BackgroundColor["DarkKhaki"] = 12433259] = "DarkKhaki";
-                // PURPLE HTML COLOR NAMES
                 BackgroundColor[BackgroundColor["Lavender"] = 15132410] = "Lavender";
                 BackgroundColor[BackgroundColor["Thistle"] = 14204888] = "Thistle";
                 BackgroundColor[BackgroundColor["Plum"] = 14524637] = "Plum";
@@ -78,7 +74,6 @@ var Tetris;
                 BackgroundColor[BackgroundColor["Indigo"] = 4915330] = "Indigo";
                 BackgroundColor[BackgroundColor["SlateBlue"] = 6970061] = "SlateBlue";
                 BackgroundColor[BackgroundColor["DarkSlateBlue"] = 4734347] = "DarkSlateBlue";
-                // GREEN HTML COLOR NAMES
                 BackgroundColor[BackgroundColor["GreenYellow"] = 11403055] = "GreenYellow";
                 BackgroundColor[BackgroundColor["Chartreuse"] = 8388352] = "Chartreuse";
                 BackgroundColor[BackgroundColor["LawnGreen"] = 8190976] = "LawnGreen";
@@ -102,7 +97,6 @@ var Tetris;
                 BackgroundColor[BackgroundColor["LightSeaGreen"] = 2142890] = "LightSeaGreen";
                 BackgroundColor[BackgroundColor["DarkCyan"] = 35723] = "DarkCyan";
                 BackgroundColor[BackgroundColor["Teal"] = 32896] = "Teal";
-                // BLUE HTML COLOR NAMES
                 BackgroundColor[BackgroundColor["Aqua"] = 65535] = "Aqua";
                 BackgroundColor[BackgroundColor["Cyan"] = 65535] = "Cyan";
                 BackgroundColor[BackgroundColor["LightCyan"] = 14745599] = "LightCyan";
@@ -128,7 +122,6 @@ var Tetris;
                 BackgroundColor[BackgroundColor["DarkBlue"] = 139] = "DarkBlue";
                 BackgroundColor[BackgroundColor["Navy"] = 128] = "Navy";
                 BackgroundColor[BackgroundColor["MidnightBlue"] = 1644912] = "MidnightBlue";
-                // BROWN HTML COLOR NAMES
                 BackgroundColor[BackgroundColor["Cornsilk"] = 16775388] = "Cornsilk";
                 BackgroundColor[BackgroundColor["Blanchedalmond"] = 16772045] = "Blanchedalmond";
                 BackgroundColor[BackgroundColor["Bisque"] = 16770244] = "Bisque";
@@ -146,7 +139,6 @@ var Tetris;
                 BackgroundColor[BackgroundColor["Sienna"] = 10506797] = "Sienna";
                 BackgroundColor[BackgroundColor["Brown"] = 10824234] = "Brown";
                 BackgroundColor[BackgroundColor["Maroon"] = 8388608] = "Maroon";
-                // WHITE HTML COLOR NAMES
                 BackgroundColor[BackgroundColor["White"] = 16777215] = "White";
                 BackgroundColor[BackgroundColor["Snow"] = 16775930] = "Snow";
                 BackgroundColor[BackgroundColor["Honeydew"] = 15794160] = "Honeydew";
@@ -164,7 +156,6 @@ var Tetris;
                 BackgroundColor[BackgroundColor["Linen"] = 16445670] = "Linen";
                 BackgroundColor[BackgroundColor["LavenderBlush"] = 16773365] = "LavenderBlush";
                 BackgroundColor[BackgroundColor["Mistyrose"] = 16770273] = "Mistyrose";
-                // GRAY HTML COLOR NAMES
                 BackgroundColor[BackgroundColor["Gainsboro"] = 14474460] = "Gainsboro";
                 BackgroundColor[BackgroundColor["LightGray"] = 13882323] = "LightGray";
                 BackgroundColor[BackgroundColor["Silver"] = 12632256] = "Silver";
@@ -340,9 +331,10 @@ var Tetris;
                     this.InstatiateHtml();
                 }
                 MonoColorSquare.prototype.InstatiateHtml = function () {
+                    var heximalColor = this.BackgroundColor.toString(16);
                     this.HtmlElement = $('<div>')
                         .addClass('sqr')
-                        .css('background-color', '#' + this.BackgroundColor.toString(16))
+                        .css('background-color', '#' + '000000'.substr(0, 6 - heximalColor.length) + heximalColor)
                         .css('display', 'none')
                         .appendTo($(this.parentHtml));
                 };
@@ -420,13 +412,16 @@ var Tetris;
                 function MonocolorShapeFabric() {
                 }
                 MonocolorShapeFabric.prototype.GetSquares = function (parentHtml, initLeft, initTop, mainField, amount) {
-                    var backgroundColorIndex = Math.round((Math.random() * 141));
+                    var backgroundColorIndex = Math.round((Math.random() * 135));
                     var enumIndex = 0;
                     var color;
+                    console.log(backgroundColorIndex);
                     for (var i in BackGroundColor) {
                         if (enumIndex === backgroundColorIndex) {
                             color = parseInt(i);
-                            break;
+                            if (!isNaN(color)) {
+                                break;
+                            }
                         }
                         enumIndex++;
                     }
@@ -682,7 +677,7 @@ var Tetris;
                             case 1:
                                 return this.IsCellFree(sq0.Left - 1, sq0.Top + 1, sq0.UniqueID) &&
                                     (sq2.Top > 0) && this.IsCellFree(sq2.Left + 1, sq2.Top - 1, sq2.UniqueID) &&
-                                    (sq3.Top >= 2) && this.IsCellFree(sq3.Left, sq3.Top - 2, sq3.UniqueID);
+                                    (sq3.Left <= Tetris.Core.Constants.MaxMainFieldWidth - 2) && this.IsCellFree(sq3.Left + 2, sq3.Top, sq3.UniqueID);
                             case 2:
                                 return this.IsCellFree(sq0.Left - 1, sq0.Top - 1, sq0.UniqueID)
                                     && (sq2.Left < Tetris.Core.Constants.MaxMainFieldWidth) && this.IsCellFree(sq2.Left + 1, sq2.Top + 1, sq2.UniqueID)
