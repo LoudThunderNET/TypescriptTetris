@@ -17,14 +17,20 @@ namespace Tetris.Game
         MainField: Square[][];
         private _shapeFabric: IShapeFabric;
         private _squareFabric: ISquareFabric;
-        private _timerHandle: any;
+        private _timerHandle: number;
         private _interval: number;
         private _currentShape: SquareBase;
         private _htmlContainer: any;
         private _score: number = 0;
+        private _scoreContainerSelector: string;
+        private _mainContainerSelector: string;
+        private _gamePaused: boolean;
 
         constructor()
         {
+            this._scoreContainerSelector = 'scopeContainer';
+            this._mainContainerSelector = 'MainContainer';
+            this._gamePaused = false;
             this.MainField = [];
             for (var i = 0; i < Core.Constants.MaxMainFieldHeight; i++) {
                 this.MainField.push(new Array<Square>(Core.Constants.MaxMainFieldWidth));
@@ -35,25 +41,29 @@ namespace Tetris.Game
             this._squareFabric = new SquareFabric();
             this._shapeFabric = new Tetris.Game.Fabric.TetraminoShapeFabric(this._squareFabric);
             this._interval = 1000;
-            this._htmlContainer = $('#MainContainer');
+            this._htmlContainer = $('#' + this._mainContainerSelector);
             if (this._htmlContainer && this._htmlContainer !== null)
             {
                 $(this._htmlContainer).width(Core.Constants.MaxMainFieldWidth * 30);
                 $(this._htmlContainer).height(Core.Constants.MaxMainFieldHeight * 30);
             }
-            $('#scopeContainer').css('left', Core.Constants.MaxMainFieldWidth * 30 + 10 + 'px');
-            this._currentShape = this.GenerateNewShape();
+            $('#' + this._scoreContainerSelector).css('left', Core.Constants.MaxMainFieldWidth * 30 + 10 + 'px');
             let self = this;
             $(document).keydown(function (e) { self.OnKeyPress(e); });
         }
 
         StartGame(): void {
+            this._gamePaused = false;
+            $('#window').text('PAUSED').hide();
+            if (this._currentShape == null) {
+                this._currentShape = this.GenerateNewShape();
+            }
             this._timerHandle = setInterval(f=> {
                 this.ActionOnTimer();
             }, this._interval);
         }
 
-        StopGame(): void
+        protected StopGame(): void
         {
             if (this._timerHandle && this._timerHandle !== null) {
                 clearInterval(this._timerHandle);
@@ -62,9 +72,30 @@ namespace Tetris.Game
         RestartGame(): void
         {
             this.StopGame();
+            this.ClearMainField();
+            this._score = 0;
+            this.ShowScore();
+            this.StartGame();
+        }
+        PauseGame(): void {
+            this._gamePaused = true;
+            this.StopGame();
+            $('#window').text('PAUSED').show()
         }
 
-        ActionOnTimer(): void
+        protected ClearMainField(): void {
+            if (this._currentShape !== null && this._currentShape !== undefined) {
+                this._currentShape.Clear(true);
+                this._currentShape = null;
+            }
+            for (let x = 0; x < Core.Constants.MaxMainFieldWidth; x++)
+                for (let y = Core.Constants.MaxMainFieldHeight - 1; y >= 0; y--)
+                {
+                    if (this.MainField[y][x] != null)
+                        this.MainField[y][x].CleanItSelf(true);
+                }
+        }
+        protected ActionOnTimer(): void
         {
             try {
                 if (!this.MoveShapeDown()) {
@@ -90,7 +121,7 @@ namespace Tetris.Game
             }
         }
 
-        GenerateNewShape(): ShapeBase
+        protected GenerateNewShape(): ShapeBase
         {
             let shape = this._shapeFabric.GetShape(this._htmlContainer, Math.round(Core.Constants.MaxMainFieldWidth / 2) - 2, 0, this.MainField);
             let isDrawn = shape.Draw();
@@ -98,12 +129,12 @@ namespace Tetris.Game
             return isDrawn ? shape : null;
         }
 
-        IsGameOver(): boolean
+        protected IsGameOver(): boolean
         {
             return true;
         }
 
-        GetFilledLines(): number[]
+        protected GetFilledLines(): number[]
         {
             let lines = new Array<number>();
             let isFullFilled: boolean;
@@ -120,14 +151,14 @@ namespace Tetris.Game
             return lines;
         }
 
-        MoveShapeDown(): boolean
+        protected MoveShapeDown(): boolean
         {
             if (this._currentShape !== null)
                 return this._currentShape.Move(Core.Enums.Direction.Down);
             return false;
         }
 
-        RemoveLines(lines: number[]): void
+        protected RemoveLines(lines: number[]): void
         {
             if (lines != null) {
                 let self = this;
@@ -140,11 +171,11 @@ namespace Tetris.Game
             }
         }
 
-        ShowScore(): void {
-            $('.score').text(this._score);
+        protected ShowScore(): void {
+            $('#' + this._scoreContainerSelector).text(this._score);
         }
 
-        ShiftDownSquares(fromLine: number, toLine: number): void {
+        protected ShiftDownSquares(fromLine: number, toLine: number): void {
             for (var y = fromLine; y > 0; y--) {
                 for (var x = 0; x < Core.Constants.MaxMainFieldWidth; x++) {
                     let obj = this.MainField[y][x];
@@ -154,7 +185,7 @@ namespace Tetris.Game
                 }
             }
         }
-        OnKeyPress(e: any): void {
+        protected OnKeyPress(e: any): void {
             switch (<number>e.which)
             {
                 case KeyCodes.LEFT_ARROW:
@@ -171,6 +202,15 @@ namespace Tetris.Game
                     break;
                 case KeyCodes.SPACEBAR:
                     this._currentShape.Move(Core.Enums.Direction.Down);
+                    break;
+                case KeyCodes.ESC:
+                case KeyCodes.BREAK_PAUSE:
+                    if (this._gamePaused) {
+                        this.StartGame();
+                    }
+                    else {
+                        this.PauseGame();
+                    }
                     break;
             }
         }

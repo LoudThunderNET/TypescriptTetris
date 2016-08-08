@@ -1,0 +1,1 @@
+//# sourceMappingURL=ISquareFabric.js.map

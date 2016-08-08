@@ -9,5 +9,7 @@
         SPACEBAR = 32,
         PG_UP = 33,
         PG_DOWN = 34,
+        ESC = 27,
+        BREAK_PAUSE = 19,
     }
 }

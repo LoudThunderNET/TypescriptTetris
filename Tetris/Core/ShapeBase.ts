@@ -43,9 +43,9 @@ namespace Tetris.Core
 
             return false;
         }
-        abstract CanRotate(direction: Enums.Rotates): boolean;
-        abstract ConstructShape(mainFiled: Square[][], startLeft: number, startTop: number): void;
-        abstract ChangePositionOnRotate(direction: Enums.Rotates):void;
+        protected abstract CanRotate(direction: Enums.Rotates): boolean;
+        protected abstract ConstructShape(mainFiled: Square[][], startLeft: number, startTop: number): void;
+        protected abstract ChangePositionOnRotate(direction: Enums.Rotates):void;
 
         GetUniqueId(): number {
             if (this.Squares && this.Squares.length > 0) {
@@ -94,9 +94,9 @@ namespace Tetris.Core
             return canDraw;
         }
 
-        protected Clear(): void {
+        Clear(remove?: boolean): void {
             this.Squares.forEach(function (e, i, a) {
-                e.CleanItSelf();
+                e.CleanItSelf(remove);
             });
         }
         protected IsCellFree(left:number, top:number, uniqueId:number): boolean
